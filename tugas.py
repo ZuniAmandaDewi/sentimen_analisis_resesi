@@ -1,14 +1,9 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
-from sklearn.neighbors import KNeighborsClassifier
-from numpy import array
 from sklearn.metrics import confusion_matrix, accuracy_score, recall_score, precision_score, f1_score
-from collections import OrderedDict
 from sklearn import svm
-from sklearn.svm import SVC
 from nltk.corpus import stopwords
 import re
 import nltk
