@@ -9,7 +9,6 @@ from sklearn.metrics import confusion_matrix, accuracy_score, recall_score, prec
 from collections import OrderedDict
 from sklearn import svm
 from sklearn.svm import SVC
-import altair as alt
 from nltk.corpus import stopwords
 import re
 import nltk
