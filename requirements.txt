@@ -3,7 +3,6 @@ pandas
 scikit-learn
 streamlit
 nltk
-re
 Sastrawi
 altair
 pickle
