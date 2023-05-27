@@ -4,6 +4,3 @@ scikit-learn
 streamlit
 nltk
 Sastrawi
-altair
-pickle
-pip
