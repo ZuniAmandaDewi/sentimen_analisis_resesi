@@ -212,12 +212,12 @@ with Implementasi:
          for x in (token):
             if x not in listStopword:
                stopword.append(x)
-          factory = StemmerFactory()
-          stemmer = factory.create_stemmer()
-          katastem=[]
-          for x in (stopword):
-            katastem.append(stemmer.stem(x))
-           joinkata = ' '.join(katastem)
+         factory = StemmerFactory()
+         stemmer = factory.create_stemmer()
+         katastem=[]
+         for x in (stopword):
+           katastem.append(stemmer.stem(x))
+         joinkata = ' '.join(katastem)
          return clean_symbol,casefolding,token,stopword,katastem,joinkata
       st.balloons()
       submit()
