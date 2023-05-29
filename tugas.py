@@ -21,7 +21,7 @@ with Home:
    st.title("""SENTIMEN ANALISIS RESESI 2023""")
    st.subheader('Kelompok 2')
    st.text("""
-            1. Nushhatul Haqqi 200411100034
+            1. Nuskhatul Haqqi 200411100034
             2. Zuni Amanda Dewi 200411100051
             3. Abd. Hanif Azhari 200411100101""")
 
@@ -175,7 +175,7 @@ with Implementasi:
 
    def submit():
       # input
-      inputs = np.array([inputan])
+      clean_symbol,casefolding,token,stopword,katastem,joinkata = preproses(inputan)
 
        # loaded_model = pickle.load(open(svm_pickle, 'rb'))
       with open('vec_pickle', 'rb') as r:
@@ -183,18 +183,44 @@ with Implementasi:
       with open('svm_pickle', 'rb') as r:
          data = pickle.load(r)
 
-      X_pred = d.predict((data.transform(inputs)).toarray())
+      X_pred = d.predict((data.transform([joinkata])).toarray())
       if X_pred[0]== 1 :
          h = 'Positif'
       else :
          h = 'Negatif'
       hasil =f"Berdasarkan data yang Anda masukkan, maka ulasan masuk dalam kategori  : {h}"
       st.success(hasil)
+      st.subheader('Preprocessing')
+      st.write('Cleansing :', clean_symbol)
+      st.write("Case Folding :",casefolding)
+      st.write("Tokenisasi :",token)
+      st.write("Stopword :",stopword)
+      st.write("Steeming :",katastem)
+      st.write("Siap Proses :",joinkata)
 
    all = st.button("Submit")
    if all :
-        st.balloons()
-        submit()
+        def preproses(inputan):
+         clean_tag = re.sub('@\S+','', inputan)
+         clean_url = re.sub('https?:\/\/.*[\r\n]*','', clean_tag)
+         clean_hastag = re.sub('#\S+',' ', clean_url)
+         clean_symbol = re.sub('[^a-zA-Z]',' ', clean_hastag)
+         casefolding = clean_symbol.lower()
+         token=word_tokenize(casefolding)
+         listStopword = set(stopwords.words('indonesian')+stopwords.words('english'))
+         stopword=[]
+         for x in (token):
+            if x not in listStopword:
+               stopword.append(x)
+         factory = StemmerFactory()
+         stemmer = factory.create_stemmer()
+         katastem=[]
+         for x in (stopword):
+            katastem.append(stemmer.stem(x))
+         joinkata = ' '.join(katastem)
+         return clean_symbol,casefolding,token,stopword,katastem,joinkata
+      st.balloons()
+      submit()
 
 
 
